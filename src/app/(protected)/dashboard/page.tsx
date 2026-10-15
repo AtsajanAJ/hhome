@@ -1,9 +1,41 @@
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import { prisma } from "@/lib/prisma";
+import { DashboardOverview } from "@/components/dashboard/dashboard-overview";
+
+// Dashboard reads the request session, so it must render at request time.
+export const instant = false;
 
 export default async function DashboardPage() {
   const session = await auth.api.getSession({ headers: await headers() });
   const name = session?.user.name || session?.user.email || "there";
+  const tasks = session?.user
+    ? await prisma.task.findMany({
+        where: { userId: session.user.id },
+        orderBy: [{ dueDate: "asc" }, { createdAt: "desc" }],
+        take: 6,
+        select: { id: true, title: true, status: true, dueDate: true },
+      })
+    : [];
+
+  const today = new Date().toISOString().slice(0, 10);
+  const summary = session?.user
+    ? await prisma.task.groupBy({
+        by: ["status"],
+        where: { userId: session.user.id },
+        _count: { _all: true },
+      })
+    : [];
+
+  const counts = {
+    TODO: summary.find((item) => item.status === "TODO")?._count._all ?? 0,
+    IN_PROGRESS: summary.find((item) => item.status === "IN_PROGRESS")?._count._all ?? 0,
+    DONE: summary.find((item) => item.status === "DONE")?._count._all ?? 0,
+  };
+
+  const overdueCount = session?.user
+    ? await prisma.task.count({ where: { userId: session.user.id, status: { not: "DONE" }, dueDate: { lt: new Date(`${today}T00:00:00.000Z`) } } })
+    : 0;
 
   return (
     <section className="mx-auto max-w-6xl py-4 sm:py-7">
@@ -15,23 +47,11 @@ export default async function DashboardPage() {
         </div>
         <span className="w-fit rounded-full bg-[#e5eee8] px-3.5 py-2 text-xs font-semibold text-[#477052]">All caught up</span>
       </div>
-      <div className="mt-12 grid gap-4 sm:grid-cols-3">
-            {[
-              ["Today", "A clear place for what matters now.", "01"],
-              ["Routines", "Keep recurring work visible and light.", "02"],
-              ["Projects", "Give larger home improvements a home.", "03"],
-            ].map(([title, description, number]) => (
-              <div key={title} className="rounded-2xl border border-[#dfe4dd] bg-[#fffdf8] p-6 shadow-[0_8px_30px_rgba(28,43,39,0.04)]">
-                <div className="flex items-center justify-between"><h3 className="font-semibold">{title}</h3><span className="text-xs font-semibold text-[#b86b3d]">{number}</span></div>
-                <p className="mt-2 text-sm leading-6 text-[#61706a]">{description}</p>
-              </div>
-            ))}
-      </div>
-      <div className="mt-8 rounded-2xl border border-dashed border-[#cdd8ce] bg-[#eef4ee] p-6 sm:p-8">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#477052]">Next up</p>
-        <h3 className="mt-3 text-xl font-semibold">Your home office is taking shape.</h3>
-        <p className="mt-2 max-w-lg text-sm leading-6 text-[#61706a]">Tasks, routines, projects, and inventory will appear here as you add them.</p>
-      </div>
+      <DashboardOverview
+        tasks={tasks.map((task) => ({ ...task, dueDate: task.dueDate?.toISOString().slice(0, 10) ?? null }))}
+        counts={counts}
+        overdueCount={overdueCount}
+      />
     </section>
   );
 }

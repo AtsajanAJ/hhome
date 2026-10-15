@@ -18,7 +18,7 @@ type IconName = "grid" | "check" | "repeat" | "folder" | "box" | "menu" | "close
 
 const primaryNav: NavItem[] = [
   { label: "Overview", href: "/dashboard", icon: "grid" },
-  { label: "Tasks", href: "/dashboard#tasks", icon: "check", soon: true },
+  { label: "Tasks", href: "/tasks", icon: "check" },
   { label: "Routines", href: "/dashboard#routines", icon: "repeat", soon: true },
 ];
 
@@ -99,6 +99,8 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
 
 export function AppShell({ children, user }: { children: ReactNode; user: User }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const pathname = usePathname();
+  const pageTitle = pathname === "/tasks" ? "Tasks" : pathname.startsWith("/settings") ? "Settings" : "Overview";
 
   useEffect(() => {
     document.body.style.overflow = sidebarOpen ? "hidden" : "";
@@ -114,7 +116,7 @@ export function AppShell({ children, user }: { children: ReactNode; user: User }
             <button aria-label="Open navigation" onClick={() => setSidebarOpen(true)} className="rounded-xl p-2 text-[#66756d] hover:bg-[#e8eee7] hover:text-[#1c2b27] lg:hidden"><Icon name="menu" className="size-5" /></button>
             <div>
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#b86b3d]">Thursday, October 15</p>
-              <h1 className="mt-0.5 text-lg font-semibold tracking-[-0.02em]">Overview</h1>
+              <h1 className="mt-0.5 text-lg font-semibold tracking-[-0.02em]">{pageTitle}</h1>
             </div>
           </div>
           <UserMenu name={user.name} email={user.email} />
