@@ -51,6 +51,15 @@ export default async function DashboardPage() {
   const routineCompletionsThisWeek = session?.user
     ? await prisma.routineCompletion.count({ where: { userId: session.user.id, completedAt: { gte: weekStart } } })
     : 0;
+  const inventorySummary = session?.user
+    ? await prisma.inventoryItem.aggregate({ where: { userId: session.user.id }, _count: { _all: true }, _sum: { quantity: true } })
+    : { _count: { _all: 0 }, _sum: { quantity: 0 } };
+  const lowStockItems = session?.user
+    ? await prisma.inventoryItem.findMany({ where: { userId: session.user.id, quantity: { lte: 2 } }, orderBy: { quantity: "asc" }, take: 4, select: { id: true, name: true, quantity: true, location: true } })
+    : [];
+  const lowStockCount = session?.user
+    ? await prisma.inventoryItem.count({ where: { userId: session.user.id, quantity: { lte: 2 } } })
+    : 0;
 
   return (
     <section className="mx-auto max-w-6xl py-4 sm:py-7">
@@ -68,6 +77,9 @@ export default async function DashboardPage() {
         overdueCount={overdueCount}
         routines={routines.map((routine) => ({ ...routine, nextDueDate: routine.nextDueDate.toISOString().slice(0, 10) }))}
         routineCompletionsThisWeek={routineCompletionsThisWeek}
+        inventorySummary={{ itemCount: inventorySummary._count._all, totalUnits: inventorySummary._sum.quantity ?? 0 }}
+        lowStockItems={lowStockItems}
+        lowStockCount={lowStockCount}
       />
     </section>
   );

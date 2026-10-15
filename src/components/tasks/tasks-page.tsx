@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 import { createTask, deleteTask, toggleTaskStatus, updateTask } from "@/app/(protected)/tasks/actions";
 import { TaskForm, type TaskDraft, type TaskPriority, type TaskStatus } from "@/components/tasks/task-form";
 
-type Task = { id: string; title: string; description: string | null; status: TaskStatus; priority: TaskPriority; dueDate: string | null };
+type Task = { id: string; title: string; description: string | null; status: TaskStatus; priority: TaskPriority; projectId: string | null; projectName: string | null; dueDate: string | null };
 type Filter = "ALL" | TaskStatus;
 type Sort = "PRIORITY" | "DUE_DATE" | "NEWEST";
 
@@ -30,7 +30,7 @@ function formatDueDate(value: string) {
   return new Intl.DateTimeFormat("en", { month: "short", day: "numeric" }).format(new Date(`${value}T00:00:00`));
 }
 
-export function TasksPage({ initialTasks }: { initialTasks: Task[] }) {
+export function TasksPage({ initialTasks, projects }: { initialTasks: Task[]; projects: { id: string; name: string }[] }) {
   const [tasks, setTasks] = useState(initialTasks);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("ALL");
@@ -123,7 +123,7 @@ export function TasksPage({ initialTasks }: { initialTasks: Task[] }) {
             <div className="flex items-start gap-3">
               <button aria-label={`Mark ${task.title} as ${task.status === "DONE" ? "todo" : "next status"}`} onClick={() => changeStatus(task)} className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition ${task.status === "DONE" ? "border-[#477052] bg-[#477052] text-white" : task.status === "IN_PROGRESS" ? "border-[#b86b3d]" : "border-[#bdc9bf] hover:border-[#b86b3d]"}`}>{task.status === "DONE" && "✓"}</button>
               <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2"><Link href={`/tasks/${task.id}`} className={`font-semibold hover:text-[#b86b3d] ${task.status === "DONE" ? "text-[#87918b] line-through" : "text-[#1c2b27]"}`}>{task.title}</Link><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${statusColor[task.status]}`}>{statusLabel[task.status]}</span><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${priorityColor[task.priority]}`}>{priorityLabel[task.priority]}</span></div>
+                <div className="flex flex-wrap items-center gap-2"><Link href={`/tasks/${task.id}`} className={`font-semibold hover:text-[#b86b3d] ${task.status === "DONE" ? "text-[#87918b] line-through" : "text-[#1c2b27]"}`}>{task.title}</Link><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${statusColor[task.status]}`}>{statusLabel[task.status]}</span><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${priorityColor[task.priority]}`}>{priorityLabel[task.priority]}</span>{task.projectName && <Link href={`/projects/${task.projectId}`} className="rounded-full bg-[#f0eee8] px-2.5 py-1 text-[10px] font-semibold text-[#7c715f] hover:bg-[#e6e1d5]">{task.projectName}</Link>}</div>
                 {task.description && <p className="mt-2 text-sm leading-6 text-[#718078]">{task.description}</p>}
                 {task.dueDate && <p className={`mt-3 text-xs font-semibold ${overdue ? "text-[#a44935]" : "text-[#87918b]"}`}>{overdue ? "Overdue · " : "Due "}{formatDueDate(task.dueDate)}</p>}
               </div>
@@ -137,7 +137,7 @@ export function TasksPage({ initialTasks }: { initialTasks: Task[] }) {
         {visibleTasks.length === 0 && <div className="rounded-2xl border border-dashed border-[#cdd8ce] bg-[#eef4ee] px-6 py-16 text-center"><p className="text-2xl">✦</p><h3 className="mt-3 text-lg font-semibold text-[#1c2b27]">{tasks.length ? "No tasks match this view" : "Your list is clear"}</h3><p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-[#718078]">{tasks.length ? "Try another filter or a different search phrase." : "Add one small task to give your day a gentle direction."}</p>{!tasks.length && <button onClick={() => setModal("create")} className="mt-5 rounded-xl bg-[#1c2b27] px-4 py-2.5 text-sm font-semibold text-[#f8f5ed]">Create your first task</button>}</div>}
       </div>
 
-      {modal && <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1c2b27]/35 p-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setModal(null); }}><div role="dialog" aria-modal="true" aria-labelledby="task-dialog-title" className="max-h-[calc(100vh-2rem)] w-full max-w-xl overflow-y-auto rounded-3xl border border-[#dfe4dd] bg-[#f8f7f2] p-5 shadow-2xl sm:p-7"><div className="mb-6 flex items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b86b3d]">Task details</p><h2 id="task-dialog-title" className="mt-2 text-2xl font-semibold tracking-[-0.03em]">{modal === "create" ? "Make room for one thing" : "Edit task"}</h2></div><button aria-label="Close task dialog" onClick={() => setModal(null)} className="rounded-xl px-2.5 py-1.5 text-xl text-[#87918b] hover:bg-[#e8eee7]">×</button></div><TaskForm key={modal === "create" ? "create" : modal.id} initialTask={modal === "create" ? undefined : modal} pending={pending} onCancel={() => setModal(null)} onSubmit={saveTask} /></div></div>}
+      {modal && <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#1c2b27]/35 p-4 backdrop-blur-sm" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setModal(null); }}><div role="dialog" aria-modal="true" aria-labelledby="task-dialog-title" className="max-h-[calc(100vh-2rem)] w-full max-w-xl overflow-y-auto rounded-3xl border border-[#dfe4dd] bg-[#f8f7f2] p-5 shadow-2xl sm:p-7"><div className="mb-6 flex items-start justify-between gap-4"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b86b3d]">Task details</p><h2 id="task-dialog-title" className="mt-2 text-2xl font-semibold tracking-[-0.03em]">{modal === "create" ? "Make room for one thing" : "Edit task"}</h2></div><button aria-label="Close task dialog" onClick={() => setModal(null)} className="rounded-xl px-2.5 py-1.5 text-xl text-[#87918b] hover:bg-[#e8eee7]">×</button></div><TaskForm key={modal === "create" ? "create" : modal.id} projects={projects} initialTask={modal === "create" ? undefined : modal} pending={pending} onCancel={() => setModal(null)} onSubmit={saveTask} /></div></div>}
     </section>
   );
 }

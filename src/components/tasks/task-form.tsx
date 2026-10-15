@@ -10,19 +10,21 @@ export type TaskDraft = {
   description: string | null;
   status: TaskStatus;
   priority: TaskPriority;
+  projectId: string | null;
   dueDate: string | null;
 };
 
 type TaskFormProps = {
   initialTask?: TaskDraft;
+  projects?: { id: string; name: string }[];
   pending: boolean;
   onCancel: () => void;
   onSubmit: (draft: TaskDraft) => void;
 };
 
-const blankTask: TaskDraft = { title: "", description: null, status: "TODO", priority: "MEDIUM", dueDate: null };
+const blankTask: TaskDraft = { title: "", description: null, status: "TODO", priority: "MEDIUM", projectId: null, dueDate: null };
 
-export function TaskForm({ initialTask, pending, onCancel, onSubmit }: TaskFormProps) {
+export function TaskForm({ initialTask, projects = [], pending, onCancel, onSubmit }: TaskFormProps) {
   const [draft, setDraft] = useState<TaskDraft>(initialTask ?? blankTask);
   const [error, setError] = useState("");
 
@@ -57,7 +59,7 @@ export function TaskForm({ initialTask, pending, onCancel, onSubmit }: TaskFormP
         <label htmlFor="task-description" className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66756d]">Notes <span className="font-normal normal-case tracking-normal text-[#9aa39d]">(optional)</span></label>
         <textarea id="task-description" value={draft.description ?? ""} onChange={(event) => setDraft({ ...draft, description: event.target.value })} rows={3} placeholder="Add a little context..." className="mt-2 w-full resize-none rounded-xl border border-[#d7dfd6] bg-[#fffdf8] px-3.5 py-3 text-sm outline-none transition placeholder:text-[#a1aca4] focus:border-[#b86b3d] focus:ring-4 focus:ring-[#b86b3d]/10" />
       </div>
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-4">
         <div>
           <label htmlFor="task-status" className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66756d]">Status</label>
           <select id="task-status" value={draft.status} onChange={(event) => setDraft({ ...draft, status: event.target.value as TaskStatus })} className="mt-2 w-full rounded-xl border border-[#d7dfd6] bg-[#fffdf8] px-3.5 py-3 text-sm outline-none focus:border-[#b86b3d] focus:ring-4 focus:ring-[#b86b3d]/10">
@@ -65,6 +67,10 @@ export function TaskForm({ initialTask, pending, onCancel, onSubmit }: TaskFormP
             <option value="IN_PROGRESS">In progress</option>
             <option value="DONE">Done</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="task-project" className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66756d]">Project</label>
+          <select id="task-project" value={draft.projectId ?? ""} onChange={(event) => setDraft({ ...draft, projectId: event.target.value || null })} className="mt-2 w-full rounded-xl border border-[#d7dfd6] bg-[#fffdf8] px-3.5 py-3 text-sm outline-none focus:border-[#b86b3d] focus:ring-4 focus:ring-[#b86b3d]/10"><option value="">No project</option>{projects.map((project) => <option key={project.id} value={project.id}>{project.name}</option>)}</select>
         </div>
         <div>
           <label htmlFor="task-priority" className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66756d]">Priority</label>

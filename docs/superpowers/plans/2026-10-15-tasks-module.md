@@ -218,3 +218,48 @@
 - [ ] Load only the current user's projects into task forms and validate selected project ownership in every mutation.
 - [ ] Show and edit project assignment in task list and task detail.
 - [ ] Run migration, tests, lint, build, and UI detector.
+
+### Task 14: Add project detail pages
+
+**Files:**
+- Create: `src/app/(protected)/projects/[id]/page.tsx`
+- Create: `src/components/projects/project-detail.tsx`
+- Modify: `src/app/(protected)/projects/actions.ts`
+- Modify: `src/components/projects/projects-page.tsx`
+- Modify: `src/components/tasks/tasks-page.tsx`
+
+**Produces:** Project detail views with project editing and the task list assigned to that project.
+
+- [ ] Fetch a project with `id + userId`, include only that user's tasks, and return not-found for foreign ids.
+- [ ] Add authenticated project update action and edit form.
+- [ ] Link project names and cards to the detail route.
+- [ ] Run lint, build, and UI detector.
+
+### Task 15: Start the Inventory module
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Create: `src/lib/validations/inventory.ts`
+- Create: `src/app/(protected)/inventory/actions.ts`
+- Create: `src/app/(protected)/inventory/page.tsx`
+- Create: `src/components/inventory/inventory-page.tsx`
+- Modify: `src/components/app-shell.tsx`
+
+**Produces:** User-scoped home-office inventory with item name, category, quantity, location, notes, edit, quantity controls, and delete.
+
+- [ ] Add an `InventoryItem` model with owner relation and indexes.
+- [ ] Add authenticated create, update, quantity-adjustment, and delete actions with ownership checks.
+- [ ] Build a responsive `/inventory` page with search, category display, quantity controls, and empty state.
+- [ ] Run migration, lint, build, and UI detector.
+
+### Task 16: Add inventory dashboard summary
+
+**Files:**
+- Modify: `src/app/(protected)/dashboard/page.tsx`
+- Modify: `src/components/dashboard/dashboard-overview.tsx`
+
+**Produces:** Dashboard inventory overview with item count, total units, low-stock count, and a short low-stock list.
+
+- [ ] Query inventory aggregates and low-stock items for the authenticated user only.
+- [ ] Show the summary with a link to `/inventory` without changing task or routine sections.
+- [ ] Run lint, build, and UI detector.

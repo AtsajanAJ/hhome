@@ -43,6 +43,11 @@ export type RoutineCompletion = Prisma.RoutineCompletionModel
  */
 export type Project = Prisma.ProjectModel
 /**
+ * Model InventoryItem
+ * 
+ */
+export type InventoryItem = Prisma.InventoryItemModel
+/**
  * Model Session
  * 
  */

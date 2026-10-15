@@ -25,6 +25,20 @@ export async function createProject(input: unknown): Promise<ProjectActionResult
   }
 }
 
+export async function updateProject(id: string, input: unknown): Promise<ProjectActionResult> {
+  try {
+    const user = await requireUser();
+    const project = projectInputSchema.parse(input);
+    const result = await prisma.project.updateMany({ where: { id, userId: user.id }, data: { name: project.name, description: project.description || null } });
+    if (result.count === 0) return { ok: false, error: "Project not found." };
+    revalidatePath("/projects");
+    revalidatePath(`/projects/${id}`);
+    return { ok: true };
+  } catch (error) {
+    return actionError(error);
+  }
+}
+
 export async function toggleProject(id: string, status: ProjectStatus): Promise<ProjectActionResult> {
   try {
     const user = await requireUser();

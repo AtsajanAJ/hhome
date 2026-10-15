@@ -8,6 +8,8 @@ type Status = "TODO" | "IN_PROGRESS" | "DONE";
 type Priority = "LOW" | "MEDIUM" | "HIGH";
 type DashboardTask = { id: string; title: string; status: Status; priority: Priority; dueDate: string | null };
 type DashboardRoutine = { id: string; title: string; frequency: "DAILY" | "WEEKLY"; nextDueDate: string };
+type InventorySummary = { itemCount: number; totalUnits: number };
+type LowStockItem = { id: string; name: string; quantity: number; location: string | null };
 
 const statusLabel: Record<Status, string> = { TODO: "Todo", IN_PROGRESS: "In progress", DONE: "Done" };
 const statusColor: Record<Status, string> = { TODO: "bg-[#eef2ec] text-[#66756d]", IN_PROGRESS: "bg-[#fff0dd] text-[#a45d2f]", DONE: "bg-[#e5eee8] text-[#477052]" };
@@ -19,7 +21,7 @@ function dueLabel(value: string | null) {
   return new Intl.DateTimeFormat("en", { month: "short", day: "numeric" }).format(new Date(`${value}T00:00:00`));
 }
 
-export function DashboardOverview({ tasks, counts, overdueCount, routines, routineCompletionsThisWeek }: { tasks: DashboardTask[]; counts: Record<Status, number>; overdueCount: number; routines: DashboardRoutine[]; routineCompletionsThisWeek: number }) {
+export function DashboardOverview({ tasks, counts, overdueCount, routines, routineCompletionsThisWeek, inventorySummary, lowStockItems, lowStockCount }: { tasks: DashboardTask[]; counts: Record<Status, number>; overdueCount: number; routines: DashboardRoutine[]; routineCompletionsThisWeek: number; inventorySummary: InventorySummary; lowStockItems: LowStockItem[]; lowStockCount: number }) {
   const [title, setTitle] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState<Priority>("MEDIUM");
@@ -34,7 +36,7 @@ export function DashboardOverview({ tasks, counts, overdueCount, routines, routi
     }
 
     setPending(true);
-    const result = await createTask({ title: title.trim(), description: null, status: "TODO", priority, dueDate: dueDate || null });
+    const result = await createTask({ title: title.trim(), description: null, status: "TODO", priority, projectId: null, dueDate: dueDate || null });
     setPending(false);
     if (!result.ok) {
       setMessage(result.error);
@@ -79,6 +81,8 @@ export function DashboardOverview({ tasks, counts, overdueCount, routines, routi
         <div className="rounded-2xl border border-[#dfe4dd] bg-[#fffdf8] p-6 shadow-[0_8px_30px_rgba(28,43,39,0.04)] sm:p-7"><div className="flex items-center justify-between gap-3"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b86b3d]">Rhythm check</p><h3 className="mt-2 text-xl font-semibold">Routines due now</h3></div><Link href="/routines" className="text-xs font-semibold text-[#477052] hover:text-[#1c2b27]">Manage →</Link></div><div className="mt-6 flex flex-col gap-2">{routines.length ? routines.map((routine) => <div key={routine.id} className="flex items-center gap-3 rounded-xl bg-[#f4f6f1] px-3.5 py-3"><span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[#e5eee8] text-sm text-[#477052]">↻</span><p className="min-w-0 flex-1 truncate text-sm font-medium text-[#1c2b27]">{routine.title}</p><span className="text-xs text-[#a45d2f]">{routine.nextDueDate < new Date().toISOString().slice(0, 10) ? "Overdue" : "Due today"}</span></div>) : <div className="rounded-xl border border-dashed border-[#cdd8ce] bg-[#eef4ee] px-4 py-8 text-center"><p className="text-sm font-semibold text-[#1c2b27]">No routines due today</p><p className="mt-1 text-xs text-[#718078]">Your rhythm is clear for now.</p></div>}</div></div>
         <div className="rounded-2xl border border-[#dfe4dd] bg-[#f8f3e9] p-6 sm:p-7"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#a45d2f]">This week</p><p className="mt-3 text-4xl font-semibold tracking-[-0.04em] text-[#1c2b27]">{routineCompletionsThisWeek}</p><p className="mt-2 text-sm leading-6 text-[#718078]">routine {routineCompletionsThisWeek === 1 ? "completion" : "completions"} logged so far.</p><Link href="/routines" className="mt-6 inline-flex rounded-xl bg-[#1c2b27] px-4 py-2.5 text-sm font-semibold text-[#f8f5ed] hover:bg-[#314840]">Open routines</Link></div>
       </div>
+
+      <div className="mt-5 rounded-2xl border border-[#dfe4dd] bg-[#fffdf8] p-6 shadow-[0_8px_30px_rgba(28,43,39,0.04)] sm:p-7"><div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start"><div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b86b3d]">Desk inventory</p><h3 className="mt-2 text-xl font-semibold">Keep useful things close</h3><p className="mt-2 text-sm text-[#718078]">{inventorySummary.itemCount} item types · {inventorySummary.totalUnits} total units</p></div><Link href="/inventory" className="text-xs font-semibold text-[#477052] hover:text-[#1c2b27]">Open inventory →</Link></div><div className="mt-6 grid gap-3 sm:grid-cols-2"><div className="rounded-xl bg-[#f8f3e9] p-4"><p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#a45d2f]">Low stock</p><p className="mt-2 text-2xl font-semibold text-[#1c2b27]">{lowStockCount}</p><p className="mt-1 text-xs text-[#87918b]">items with two or fewer left</p></div><div className="flex flex-col gap-2">{lowStockItems.length ? lowStockItems.map((item) => <Link key={item.id} href="/inventory" className="flex items-center gap-3 rounded-xl bg-[#f4f6f1] px-3.5 py-2.5 hover:bg-[#eaf0e9]"><span className="size-2 rounded-full bg-[#b86b3d]" /><span className="flex-1 truncate text-sm font-medium text-[#1c2b27]">{item.name}</span><span className="text-xs font-semibold text-[#a45d2f]">{item.quantity} left</span></Link>) : <p className="self-center text-sm text-[#87918b]">Everything looks well stocked.</p>}</div></div></div>
     </>
   );
 }

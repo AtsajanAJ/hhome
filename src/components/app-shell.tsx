@@ -24,7 +24,7 @@ const primaryNav: NavItem[] = [
 
 const secondaryNav: NavItem[] = [
   { label: "Projects", href: "/projects", icon: "folder" },
-  { label: "Inventory", href: "/dashboard#inventory", icon: "box", soon: true },
+  { label: "Inventory", href: "/inventory", icon: "box" },
 ];
 
 function Icon({ name, className = "size-4" }: { name: IconName; className?: string }) {

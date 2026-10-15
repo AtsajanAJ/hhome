@@ -16,14 +16,24 @@ function actionError(error: unknown): TaskActionResult {
   if (error instanceof Error && error.message === "Unauthorized") {
     return { ok: false, error: "Your session has expired. Please sign in again." };
   }
+  if (error instanceof Error && error.message === "Invalid project") {
+    return { ok: false, error: "Choose one of your own projects." };
+  }
 
   return { ok: false, error: "Something went wrong. Please try again." };
+}
+
+async function validateProject(projectId: string | null, userId: string) {
+  if (!projectId) return;
+  const project = await prisma.project.findFirst({ where: { id: projectId, userId }, select: { id: true } });
+  if (!project) throw new Error("Invalid project");
 }
 
 export async function createTask(input: unknown): Promise<TaskActionResult> {
   try {
     const user = await requireUser();
     const task = taskInputSchema.parse(input);
+    await validateProject(task.projectId, user.id);
 
     await prisma.task.create({
       data: {
@@ -31,6 +41,7 @@ export async function createTask(input: unknown): Promise<TaskActionResult> {
         description: task.description || null,
         status: task.status as TaskStatus,
         priority: task.priority as TaskPriority,
+        projectId: task.projectId,
         dueDate: toDate(task.dueDate),
         userId: user.id,
       },
@@ -47,6 +58,7 @@ export async function updateTask(id: string, input: unknown): Promise<TaskAction
   try {
     const user = await requireUser();
     const task = taskInputSchema.parse(input);
+    await validateProject(task.projectId, user.id);
 
     const result = await prisma.task.updateMany({
       where: { id, userId: user.id },
@@ -55,6 +67,7 @@ export async function updateTask(id: string, input: unknown): Promise<TaskAction
         description: task.description || null,
         status: task.status as TaskStatus,
         priority: task.priority as TaskPriority,
+        projectId: task.projectId,
         dueDate: toDate(task.dueDate),
       },
     });

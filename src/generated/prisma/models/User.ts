@@ -204,6 +204,7 @@ export type UserWhereInput = {
   routines?: Prisma.RoutineListRelationFilter
   routineCompletions?: Prisma.RoutineCompletionListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  inventoryItems?: Prisma.InventoryItemListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -220,6 +221,7 @@ export type UserOrderByWithRelationInput = {
   routines?: Prisma.RoutineOrderByRelationAggregateInput
   routineCompletions?: Prisma.RoutineCompletionOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
+  inventoryItems?: Prisma.InventoryItemOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -239,6 +241,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   routines?: Prisma.RoutineListRelationFilter
   routineCompletions?: Prisma.RoutineCompletionListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  inventoryItems?: Prisma.InventoryItemListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -281,6 +284,7 @@ export type UserCreateInput = {
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -297,6 +301,7 @@ export type UserUncheckedCreateInput = {
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -313,6 +318,7 @@ export type UserUpdateInput = {
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -329,6 +335,7 @@ export type UserUncheckedUpdateInput = {
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -468,6 +475,20 @@ export type UserUpdateOneRequiredWithoutProjectsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProjectsInput, Prisma.UserUpdateWithoutProjectsInput>, Prisma.UserUncheckedUpdateWithoutProjectsInput>
 }
 
+export type UserCreateNestedOneWithoutInventoryItemsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInventoryItemsInput, Prisma.UserUncheckedCreateWithoutInventoryItemsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInventoryItemsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutInventoryItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutInventoryItemsInput, Prisma.UserUncheckedCreateWithoutInventoryItemsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutInventoryItemsInput
+  upsert?: Prisma.UserUpsertWithoutInventoryItemsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInventoryItemsInput, Prisma.UserUpdateWithoutInventoryItemsInput>, Prisma.UserUncheckedUpdateWithoutInventoryItemsInput>
+}
+
 export type UserCreateNestedOneWithoutSessionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
@@ -509,6 +530,7 @@ export type UserCreateWithoutTasksInput = {
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -524,6 +546,7 @@ export type UserUncheckedCreateWithoutTasksInput = {
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -555,6 +578,7 @@ export type UserUpdateWithoutTasksInput = {
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -570,6 +594,7 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRoutinesInput = {
@@ -585,6 +610,7 @@ export type UserCreateWithoutRoutinesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoutinesInput = {
@@ -600,6 +626,7 @@ export type UserUncheckedCreateWithoutRoutinesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoutinesInput = {
@@ -631,6 +658,7 @@ export type UserUpdateWithoutRoutinesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoutinesInput = {
@@ -646,6 +674,7 @@ export type UserUncheckedUpdateWithoutRoutinesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRoutineCompletionsInput = {
@@ -661,6 +690,7 @@ export type UserCreateWithoutRoutineCompletionsInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoutineCompletionsInput = {
@@ -676,6 +706,7 @@ export type UserUncheckedCreateWithoutRoutineCompletionsInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoutineCompletionsInput = {
@@ -707,6 +738,7 @@ export type UserUpdateWithoutRoutineCompletionsInput = {
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoutineCompletionsInput = {
@@ -722,6 +754,7 @@ export type UserUncheckedUpdateWithoutRoutineCompletionsInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -737,6 +770,7 @@ export type UserCreateWithoutProjectsInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -752,6 +786,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -783,6 +818,7 @@ export type UserUpdateWithoutProjectsInput = {
   tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -798,6 +834,87 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutInventoryItemsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutInventoryItemsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutInventoryItemsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutInventoryItemsInput, Prisma.UserUncheckedCreateWithoutInventoryItemsInput>
+}
+
+export type UserUpsertWithoutInventoryItemsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutInventoryItemsInput, Prisma.UserUncheckedUpdateWithoutInventoryItemsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutInventoryItemsInput, Prisma.UserUncheckedCreateWithoutInventoryItemsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutInventoryItemsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutInventoryItemsInput, Prisma.UserUncheckedUpdateWithoutInventoryItemsInput>
+}
+
+export type UserUpdateWithoutInventoryItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutInventoryItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -813,6 +930,7 @@ export type UserCreateWithoutSessionsInput = {
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -828,6 +946,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -859,6 +978,7 @@ export type UserUpdateWithoutSessionsInput = {
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -874,6 +994,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -889,6 +1010,7 @@ export type UserCreateWithoutAccountsInput = {
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -904,6 +1026,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -935,6 +1058,7 @@ export type UserUpdateWithoutAccountsInput = {
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -950,6 +1074,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -964,6 +1089,7 @@ export type UserCountOutputType = {
   routines: number
   routineCompletions: number
   projects: number
+  inventoryItems: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -973,6 +1099,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   routines?: boolean | UserCountOutputTypeCountRoutinesArgs
   routineCompletions?: boolean | UserCountOutputTypeCountRoutineCompletionsArgs
   projects?: boolean | UserCountOutputTypeCountProjectsArgs
+  inventoryItems?: boolean | UserCountOutputTypeCountInventoryItemsArgs
 }
 
 /**
@@ -1027,6 +1154,13 @@ export type UserCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.ProjectWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountInventoryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.InventoryItemWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1042,6 +1176,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   routines?: boolean | Prisma.User$routinesArgs<ExtArgs>
   routineCompletions?: boolean | Prisma.User$routineCompletionsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
+  inventoryItems?: boolean | Prisma.User$inventoryItemsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1083,6 +1218,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   routines?: boolean | Prisma.User$routinesArgs<ExtArgs>
   routineCompletions?: boolean | Prisma.User$routineCompletionsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
+  inventoryItems?: boolean | Prisma.User$inventoryItemsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1097,6 +1233,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     routines: Prisma.$RoutinePayload<ExtArgs>[]
     routineCompletions: Prisma.$RoutineCompletionPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
+    inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1506,6 +1643,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   routines<T extends Prisma.User$routinesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$routinesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoutinePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   routineCompletions<T extends Prisma.User$routineCompletionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$routineCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoutineCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.User$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  inventoryItems<T extends Prisma.User$inventoryItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2076,6 +2214,30 @@ export type User$projectsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * User.inventoryItems
+ */
+export type User$inventoryItemsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the InventoryItem
+   */
+  select?: Prisma.InventoryItemSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the InventoryItem
+   */
+  omit?: Prisma.InventoryItemOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.InventoryItemInclude<ExtArgs> | null
+  where?: Prisma.InventoryItemWhereInput
+  orderBy?: Prisma.InventoryItemOrderByWithRelationInput | Prisma.InventoryItemOrderByWithRelationInput[]
+  cursor?: Prisma.InventoryItemWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.InventoryItemScalarFieldEnum | Prisma.InventoryItemScalarFieldEnum[]
 }
 
 /**

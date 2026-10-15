@@ -56,6 +56,7 @@ export const ModelName = {
   Routine: 'Routine',
   RoutineCompletion: 'RoutineCompletion',
   Project: 'Project',
+  InventoryItem: 'InventoryItem',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -99,7 +100,8 @@ export const TaskScalarFieldEnum = {
   dueDate: 'dueDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  userId: 'userId'
+  userId: 'userId',
+  projectId: 'projectId'
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
@@ -142,6 +144,21 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const InventoryItemScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  category: 'category',
+  quantity: 'quantity',
+  location: 'location',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type InventoryItemScalarFieldEnum = (typeof InventoryItemScalarFieldEnum)[keyof typeof InventoryItemScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {
