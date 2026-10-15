@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { TaskStatus } from "@/generated/prisma/client";
+import { TaskPriority, TaskStatus } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/auth-helpers";
 import { taskInputSchema, taskStatusSchema } from "@/lib/validations/task";
@@ -30,6 +30,7 @@ export async function createTask(input: unknown): Promise<TaskActionResult> {
         title: task.title,
         description: task.description || null,
         status: task.status as TaskStatus,
+        priority: task.priority as TaskPriority,
         dueDate: toDate(task.dueDate),
         userId: user.id,
       },
@@ -53,6 +54,7 @@ export async function updateTask(id: string, input: unknown): Promise<TaskAction
         title: task.title,
         description: task.description || null,
         status: task.status as TaskStatus,
+        priority: task.priority as TaskPriority,
         dueDate: toDate(task.dueDate),
       },
     });

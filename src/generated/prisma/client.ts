@@ -52,6 +52,21 @@ export type User = Prisma.UserModel
  */
 export type Task = Prisma.TaskModel
 /**
+ * Model Routine
+ * 
+ */
+export type Routine = Prisma.RoutineModel
+/**
+ * Model RoutineCompletion
+ * 
+ */
+export type RoutineCompletion = Prisma.RoutineCompletionModel
+/**
+ * Model Project
+ * 
+ */
+export type Project = Prisma.ProjectModel
+/**
  * Model Session
  * 
  */

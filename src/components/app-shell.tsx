@@ -19,11 +19,11 @@ type IconName = "grid" | "check" | "repeat" | "folder" | "box" | "menu" | "close
 const primaryNav: NavItem[] = [
   { label: "Overview", href: "/dashboard", icon: "grid" },
   { label: "Tasks", href: "/tasks", icon: "check" },
-  { label: "Routines", href: "/dashboard#routines", icon: "repeat", soon: true },
+  { label: "Routines", href: "/routines", icon: "repeat" },
 ];
 
 const secondaryNav: NavItem[] = [
-  { label: "Projects", href: "/dashboard#projects", icon: "folder", soon: true },
+  { label: "Projects", href: "/projects", icon: "folder" },
   { label: "Inventory", href: "/dashboard#inventory", icon: "box", soon: true },
 ];
 

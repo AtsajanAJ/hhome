@@ -18,6 +18,9 @@ model User {
   sessions      Session[]
   accounts      Account[]
   tasks         Task[]
+  routines      Routine[]
+  routineCompletions RoutineCompletion[]
+  projects      Project[]
 }
 
 enum TaskStatus {
@@ -26,19 +29,84 @@ enum TaskStatus {
   DONE
 }
 
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum RoutineFrequency {
+  DAILY
+  WEEKLY
+}
+
+enum ProjectStatus {
+  ACTIVE
+  COMPLETED
+}
+
 model Task {
   id          String     @id @default(cuid())
   title       String
   description String?
   status      TaskStatus @default(TODO)
+  priority    TaskPriority @default(MEDIUM)
   dueDate     DateTime?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   userId      String
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  projectId   String?
+  project     Project?   @relation(fields: [projectId], references: [id], onDelete: SetNull)
 
   @@index([userId, status])
+  @@index([userId, priority])
   @@index([userId, dueDate])
+  @@index([projectId])
+}
+
+model Routine {
+  id              String           @id @default(cuid())
+  title           String
+  description     String?
+  frequency       RoutineFrequency
+  nextDueDate     DateTime
+  lastCompletedAt DateTime?
+  active          Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  userId          String
+  user            User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  completions     RoutineCompletion[]
+
+  @@index([userId, active])
+  @@index([userId, nextDueDate])
+}
+
+model RoutineCompletion {
+  id        String   @id @default(cuid())
+  completedAt DateTime @default(now())
+  routineId String
+  userId    String
+  routine   Routine  @relation(fields: [routineId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([routineId, completedAt])
+  @@index([userId, completedAt])
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String?
+  status      ProjectStatus @default(ACTIVE)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  userId      String
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tasks       Task[]
+
+  @@index([userId, status])
 }
 
 model Session {

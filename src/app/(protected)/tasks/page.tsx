@@ -11,7 +11,7 @@ export default async function TasksRoute() {
   const tasks = await prisma.task.findMany({
     where: { userId: user.id },
     orderBy: [{ status: "asc" }, { dueDate: "asc" }, { createdAt: "desc" }],
-    select: { id: true, title: true, description: true, status: true, dueDate: true },
+    select: { id: true, title: true, description: true, status: true, priority: true, dueDate: true },
   });
 
   return (

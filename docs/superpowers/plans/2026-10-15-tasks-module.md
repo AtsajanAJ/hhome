@@ -91,3 +91,130 @@
 - [ ] Add a quick-add form that accepts a title and optional due date and calls the existing authenticated `createTask` action.
 - [ ] Link the dashboard task list to `/tasks` and show a useful empty state for new users.
 - [ ] Run `bun run lint` and `bun run build`; verify dashboard data is request-time rendered and no task from another user can appear.
+
+### Task 6: Add task priority and sorting
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Modify: `src/lib/validations/task.ts`
+- Modify: `src/app/(protected)/tasks/actions.ts`
+- Modify: `src/app/(protected)/tasks/page.tsx`
+- Modify: `src/components/tasks/task-form.tsx`
+- Modify: `src/components/tasks/tasks-page.tsx`
+- Modify: `src/app/(protected)/dashboard/page.tsx`
+- Modify: `src/components/dashboard/dashboard-overview.tsx`
+
+**Produces:** Low / Medium / High priority on every task, visible priority badges, priority-aware sorting, and a migration that preserves existing tasks as Medium.
+
+- [ ] Add `TaskPriority` with `LOW`, `MEDIUM`, and `HIGH`, defaulting the database field to `MEDIUM`.
+- [ ] Include priority in validation, Server Actions, server selects, forms, cards, dashboard rows, and sorting controls.
+- [ ] Keep ownership checks unchanged and run the migration, lint, build, and UI detector.
+
+### Task 7: Add task detail pages
+
+**Files:**
+- Create: `src/app/(protected)/tasks/[id]/page.tsx`
+- Create: `src/components/tasks/task-detail.tsx`
+- Modify: `src/components/tasks/tasks-page.tsx`
+
+**Produces:** A user-scoped task detail route with full edit, status, delete, and back navigation.
+
+- [ ] Fetch one task with `id + userId` and return not-found for missing or foreign tasks.
+- [ ] Link task titles from the list to `/tasks/[id]`.
+- [ ] Reuse the existing task form and Server Actions for edits and deletion.
+- [ ] Run lint and production build and verify a foreign task id never renders.
+
+### Task 8: Add automated task validation tests
+
+**Files:**
+- Create: `vitest.config.ts`
+- Create: `tests/task-validation.test.ts`
+
+**Produces:** Repeatable unit coverage for task title, description, status, priority, and due-date validation.
+
+- [ ] Configure Vitest with the project `@/*` alias and Node test environment.
+- [ ] Test valid task input, whitespace trimming, invalid empty/overlong title, invalid priority/status, description limit, and date format.
+- [ ] Run `bun test` and keep the tests independent from Neon credentials.
+
+### Task 9: Start the Routines module
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Create: `src/lib/validations/routine.ts`
+- Create: `src/app/(protected)/routines/actions.ts`
+- Create: `src/app/(protected)/routines/page.tsx`
+- Create: `src/components/routines/routines-page.tsx`
+- Modify: `src/components/app-shell.tsx`
+
+**Produces:** User-scoped recurring routines with daily/weekly frequency, next-due dates, completion rollover, pause/resume, and deletion.
+
+- [ ] Add a `Routine` model with `RoutineFrequency`, required owner, active state, next due date, and completion timestamp.
+- [ ] Add authenticated create, complete, toggle-active, and delete actions with `id + userId` ownership checks.
+- [ ] Build a responsive `/routines` page with create form, routine cards, next-due labels, and empty state.
+- [ ] Run Prisma migration, unit checks, lint, build, and UI detector.
+
+### Task 10: Add routine history and editing
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Modify: `src/lib/validations/routine.ts`
+- Modify: `src/app/(protected)/routines/actions.ts`
+- Modify: `src/app/(protected)/routines/page.tsx`
+- Modify: `src/components/routines/routines-page.tsx`
+
+**Produces:** Routine completion history, editable routine details, and cadence-preserving rollover for overdue routines.
+
+- [ ] Add `RoutineCompletion` linked to the owner routine with completion timestamps.
+- [ ] Create a completion record on every successful Complete action and calculate the next due date from the prior schedule until it reaches a future date.
+- [ ] Add an authenticated update action and edit mode for title, notes, frequency, and next due date.
+- [ ] Show recent completion dates on each routine card and preserve ownership checks.
+- [ ] Run the migration, lint, build, tests, and UI detector.
+
+### Task 11: Add routine dashboard summary
+
+**Files:**
+- Modify: `src/app/(protected)/dashboard/page.tsx`
+- Modify: `src/components/dashboard/dashboard-overview.tsx`
+
+**Produces:** Dashboard visibility for active routines due today/overdue and completions this week.
+
+- [ ] Query only the authenticated user's active routines and completion records.
+- [ ] Show a compact due-routine list with a link to `/routines` and a weekly completion count.
+- [ ] Preserve the existing task summary and quick-add flow.
+- [ ] Run lint, build, and UI detector.
+
+### Task 12: Start the Projects module
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Create: `src/lib/validations/project.ts`
+- Create: `src/app/(protected)/projects/actions.ts`
+- Create: `src/app/(protected)/projects/page.tsx`
+- Create: `src/components/projects/projects-page.tsx`
+- Modify: `src/components/app-shell.tsx`
+
+**Produces:** User-scoped project management with active/completed state and a responsive project list.
+
+- [ ] Add a `Project` model with name, description, status, timestamps, and owner relation.
+- [ ] Add authenticated create, toggle-status, and delete actions with ownership checks.
+- [ ] Build `/projects` with create form, project cards, complete/reopen, delete, and empty state.
+- [ ] Run migration, lint, build, and UI detector.
+
+### Task 13: Connect Tasks to Projects
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Modify: `src/lib/validations/task.ts`
+- Modify: `src/app/(protected)/tasks/actions.ts`
+- Modify: `src/app/(protected)/tasks/page.tsx`
+- Modify: `src/components/tasks/task-form.tsx`
+- Modify: `src/components/tasks/tasks-page.tsx`
+- Modify: `src/app/(protected)/tasks/[id]/page.tsx`
+- Modify: `src/components/tasks/task-detail.tsx`
+
+**Produces:** Optional project assignment for tasks with server-side project ownership validation.
+
+- [ ] Add nullable `projectId` relation and index to `Task`.
+- [ ] Load only the current user's projects into task forms and validate selected project ownership in every mutation.
+- [ ] Show and edit project assignment in task list and task detail.
+- [ ] Run migration, tests, lint, build, and UI detector.

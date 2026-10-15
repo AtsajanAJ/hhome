@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { createTask, deleteTask, toggleTaskStatus, updateTask } from "@/app/(protected)/tasks/actions";
-import { TaskForm, type TaskDraft, type TaskStatus } from "@/components/tasks/task-form";
+import { TaskForm, type TaskDraft, type TaskPriority, type TaskStatus } from "@/components/tasks/task-form";
 
-type Task = { id: string; title: string; description: string | null; status: TaskStatus; dueDate: string | null };
+type Task = { id: string; title: string; description: string | null; status: TaskStatus; priority: TaskPriority; dueDate: string | null };
 type Filter = "ALL" | TaskStatus;
+type Sort = "PRIORITY" | "DUE_DATE" | "NEWEST";
 
 const filterOptions: { label: string; value: Filter }[] = [
   { label: "All", value: "ALL" },
@@ -16,6 +18,9 @@ const filterOptions: { label: string; value: Filter }[] = [
 
 const statusLabel: Record<TaskStatus, string> = { TODO: "Todo", IN_PROGRESS: "In progress", DONE: "Done" };
 const statusColor: Record<TaskStatus, string> = { TODO: "bg-[#eef2ec] text-[#66756d]", IN_PROGRESS: "bg-[#fff0dd] text-[#a45d2f]", DONE: "bg-[#e5eee8] text-[#477052]" };
+const priorityLabel: Record<TaskPriority, string> = { LOW: "Low", MEDIUM: "Medium", HIGH: "High" };
+const priorityColor: Record<TaskPriority, string> = { LOW: "bg-[#eef2ec] text-[#66756d]", MEDIUM: "bg-[#fff0dd] text-[#a45d2f]", HIGH: "bg-[#f8e9e4] text-[#a44935]" };
+const priorityRank: Record<TaskPriority, number> = { HIGH: 0, MEDIUM: 1, LOW: 2 };
 
 function today() {
   return new Date().toISOString().slice(0, 10);
@@ -29,18 +34,25 @@ export function TasksPage({ initialTasks }: { initialTasks: Task[] }) {
   const [tasks, setTasks] = useState(initialTasks);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<Filter>("ALL");
+  const [sort, setSort] = useState<Sort>("PRIORITY");
   const [modal, setModal] = useState<"create" | Task | null>(null);
   const [pending, setPending] = useState(false);
   const [notice, setNotice] = useState("");
 
   const visibleTasks = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
-    return tasks.filter((task) => {
+    const filtered = tasks.filter((task) => {
       const matchesFilter = filter === "ALL" || task.status === filter;
       const matchesQuery = !normalizedQuery || `${task.title} ${task.description ?? ""}`.toLowerCase().includes(normalizedQuery);
       return matchesFilter && matchesQuery;
     });
-  }, [filter, query, tasks]);
+
+    return filtered.sort((a, b) => {
+      if (sort === "PRIORITY") return priorityRank[a.priority] - priorityRank[b.priority];
+      if (sort === "DUE_DATE") return (a.dueDate ?? "9999-12-31").localeCompare(b.dueDate ?? "9999-12-31");
+      return 0;
+    });
+  }, [filter, query, sort, tasks]);
 
   async function saveTask(draft: TaskDraft) {
     if (!modal) return;
@@ -99,6 +111,7 @@ export function TasksPage({ initialTasks }: { initialTasks: Task[] }) {
         <div className="flex gap-1 overflow-x-auto" aria-label="Filter tasks">
           {filterOptions.map((option) => <button key={option.value} onClick={() => setFilter(option.value)} className={`whitespace-nowrap rounded-lg px-3 py-2 text-xs font-semibold transition ${filter === option.value ? "bg-[#e5eee8] text-[#1c2b27]" : "text-[#87918b] hover:bg-[#f1f4ef]"}`}>{option.label}</button>)}
         </div>
+        <label className="flex items-center gap-2 border-t border-[#e5e9e2] pt-3 text-xs font-semibold text-[#87918b] sm:border-l sm:border-t-0 sm:pl-3 sm:pt-0"><span>Sort</span><select value={sort} onChange={(event) => setSort(event.target.value as Sort)} className="rounded-lg bg-[#f4f6f1] px-2.5 py-2 text-xs text-[#66756d] outline-none"><option value="PRIORITY">Priority</option><option value="DUE_DATE">Due date</option><option value="NEWEST">Newest</option></select></label>
       </div>
 
       {notice && <p role="status" className="mt-4 rounded-xl bg-[#eef4ee] px-4 py-3 text-sm text-[#477052]">{notice}</p>}
@@ -110,7 +123,7 @@ export function TasksPage({ initialTasks }: { initialTasks: Task[] }) {
             <div className="flex items-start gap-3">
               <button aria-label={`Mark ${task.title} as ${task.status === "DONE" ? "todo" : "next status"}`} onClick={() => changeStatus(task)} className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition ${task.status === "DONE" ? "border-[#477052] bg-[#477052] text-white" : task.status === "IN_PROGRESS" ? "border-[#b86b3d]" : "border-[#bdc9bf] hover:border-[#b86b3d]"}`}>{task.status === "DONE" && "✓"}</button>
               <div className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2"><h3 className={`font-semibold ${task.status === "DONE" ? "text-[#87918b] line-through" : "text-[#1c2b27]"}`}>{task.title}</h3><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${statusColor[task.status]}`}>{statusLabel[task.status]}</span></div>
+                <div className="flex flex-wrap items-center gap-2"><Link href={`/tasks/${task.id}`} className={`font-semibold hover:text-[#b86b3d] ${task.status === "DONE" ? "text-[#87918b] line-through" : "text-[#1c2b27]"}`}>{task.title}</Link><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${statusColor[task.status]}`}>{statusLabel[task.status]}</span><span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${priorityColor[task.priority]}`}>{priorityLabel[task.priority]}</span></div>
                 {task.description && <p className="mt-2 text-sm leading-6 text-[#718078]">{task.description}</p>}
                 {task.dueDate && <p className={`mt-3 text-xs font-semibold ${overdue ? "text-[#a44935]" : "text-[#87918b]"}`}>{overdue ? "Overdue · " : "Due "}{formatDueDate(task.dueDate)}</p>}
               </div>

@@ -3,11 +3,13 @@
 import { useState, type FormEvent } from "react";
 
 export type TaskStatus = "TODO" | "IN_PROGRESS" | "DONE";
+export type TaskPriority = "LOW" | "MEDIUM" | "HIGH";
 
 export type TaskDraft = {
   title: string;
   description: string | null;
   status: TaskStatus;
+  priority: TaskPriority;
   dueDate: string | null;
 };
 
@@ -18,7 +20,7 @@ type TaskFormProps = {
   onSubmit: (draft: TaskDraft) => void;
 };
 
-const blankTask: TaskDraft = { title: "", description: null, status: "TODO", dueDate: null };
+const blankTask: TaskDraft = { title: "", description: null, status: "TODO", priority: "MEDIUM", dueDate: null };
 
 export function TaskForm({ initialTask, pending, onCancel, onSubmit }: TaskFormProps) {
   const [draft, setDraft] = useState<TaskDraft>(initialTask ?? blankTask);
@@ -55,13 +57,21 @@ export function TaskForm({ initialTask, pending, onCancel, onSubmit }: TaskFormP
         <label htmlFor="task-description" className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66756d]">Notes <span className="font-normal normal-case tracking-normal text-[#9aa39d]">(optional)</span></label>
         <textarea id="task-description" value={draft.description ?? ""} onChange={(event) => setDraft({ ...draft, description: event.target.value })} rows={3} placeholder="Add a little context..." className="mt-2 w-full resize-none rounded-xl border border-[#d7dfd6] bg-[#fffdf8] px-3.5 py-3 text-sm outline-none transition placeholder:text-[#a1aca4] focus:border-[#b86b3d] focus:ring-4 focus:ring-[#b86b3d]/10" />
       </div>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-3">
         <div>
           <label htmlFor="task-status" className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66756d]">Status</label>
           <select id="task-status" value={draft.status} onChange={(event) => setDraft({ ...draft, status: event.target.value as TaskStatus })} className="mt-2 w-full rounded-xl border border-[#d7dfd6] bg-[#fffdf8] px-3.5 py-3 text-sm outline-none focus:border-[#b86b3d] focus:ring-4 focus:ring-[#b86b3d]/10">
             <option value="TODO">Todo</option>
             <option value="IN_PROGRESS">In progress</option>
             <option value="DONE">Done</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="task-priority" className="text-xs font-semibold uppercase tracking-[0.16em] text-[#66756d]">Priority</label>
+          <select id="task-priority" value={draft.priority} onChange={(event) => setDraft({ ...draft, priority: event.target.value as TaskPriority })} className="mt-2 w-full rounded-xl border border-[#d7dfd6] bg-[#fffdf8] px-3.5 py-3 text-sm outline-none focus:border-[#b86b3d] focus:ring-4 focus:ring-[#b86b3d]/10">
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
           </select>
         </div>
         <div>

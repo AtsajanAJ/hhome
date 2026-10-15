@@ -53,6 +53,9 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Task: 'Task',
+  Routine: 'Routine',
+  RoutineCompletion: 'RoutineCompletion',
+  Project: 'Project',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -92,6 +95,7 @@ export const TaskScalarFieldEnum = {
   title: 'title',
   description: 'description',
   status: 'status',
+  priority: 'priority',
   dueDate: 'dueDate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -99,6 +103,45 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const RoutineScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  frequency: 'frequency',
+  nextDueDate: 'nextDueDate',
+  lastCompletedAt: 'lastCompletedAt',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type RoutineScalarFieldEnum = (typeof RoutineScalarFieldEnum)[keyof typeof RoutineScalarFieldEnum]
+
+
+export const RoutineCompletionScalarFieldEnum = {
+  id: 'id',
+  completedAt: 'completedAt',
+  routineId: 'routineId',
+  userId: 'userId'
+} as const
+
+export type RoutineCompletionScalarFieldEnum = (typeof RoutineCompletionScalarFieldEnum)[keyof typeof RoutineCompletionScalarFieldEnum]
+
+
+export const ProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

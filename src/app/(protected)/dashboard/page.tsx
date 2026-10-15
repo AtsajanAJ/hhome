@@ -12,9 +12,9 @@ export default async function DashboardPage() {
   const tasks = session?.user
     ? await prisma.task.findMany({
         where: { userId: session.user.id },
-        orderBy: [{ dueDate: "asc" }, { createdAt: "desc" }],
+        orderBy: [{ priority: "asc" }, { dueDate: "asc" }, { createdAt: "desc" }],
         take: 6,
-        select: { id: true, title: true, status: true, dueDate: true },
+        select: { id: true, title: true, status: true, priority: true, dueDate: true },
       })
     : [];
 
@@ -36,6 +36,21 @@ export default async function DashboardPage() {
   const overdueCount = session?.user
     ? await prisma.task.count({ where: { userId: session.user.id, status: { not: "DONE" }, dueDate: { lt: new Date(`${today}T00:00:00.000Z`) } } })
     : 0;
+  const endOfToday = new Date(`${today}T23:59:59.999Z`);
+  const weekStart = new Date(endOfToday);
+  weekStart.setUTCDate(weekStart.getUTCDate() - ((weekStart.getUTCDay() + 6) % 7));
+  weekStart.setUTCHours(0, 0, 0, 0);
+  const routines = session?.user
+    ? await prisma.routine.findMany({
+        where: { userId: session.user.id, active: true, nextDueDate: { lte: endOfToday } },
+        orderBy: { nextDueDate: "asc" },
+        take: 4,
+        select: { id: true, title: true, frequency: true, nextDueDate: true },
+      })
+    : [];
+  const routineCompletionsThisWeek = session?.user
+    ? await prisma.routineCompletion.count({ where: { userId: session.user.id, completedAt: { gte: weekStart } } })
+    : 0;
 
   return (
     <section className="mx-auto max-w-6xl py-4 sm:py-7">
@@ -51,6 +66,8 @@ export default async function DashboardPage() {
         tasks={tasks.map((task) => ({ ...task, dueDate: task.dueDate?.toISOString().slice(0, 10) ?? null }))}
         counts={counts}
         overdueCount={overdueCount}
+        routines={routines.map((routine) => ({ ...routine, nextDueDate: routine.nextDueDate.toISOString().slice(0, 10) }))}
+        routineCompletionsThisWeek={routineCompletionsThisWeek}
       />
     </section>
   );
