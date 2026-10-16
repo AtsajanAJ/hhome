@@ -57,6 +57,9 @@ export const ModelName = {
   RoutineCompletion: 'RoutineCompletion',
   Project: 'Project',
   InventoryItem: 'InventoryItem',
+  Report: 'Report',
+  ReportAttachment: 'ReportAttachment',
+  GoogleDriveConnection: 'GoogleDriveConnection',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -159,6 +162,50 @@ export const InventoryItemScalarFieldEnum = {
 } as const
 
 export type InventoryItemScalarFieldEnum = (typeof InventoryItemScalarFieldEnum)[keyof typeof InventoryItemScalarFieldEnum]
+
+
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  reportType: 'reportType',
+  source: 'source',
+  content: 'content',
+  externalFileId: 'externalFileId',
+  externalFileName: 'externalFileName',
+  externalFileUrl: 'externalFileUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const ReportAttachmentScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  size: 'size',
+  data: 'data',
+  createdAt: 'createdAt',
+  reportId: 'reportId',
+  userId: 'userId'
+} as const
+
+export type ReportAttachmentScalarFieldEnum = (typeof ReportAttachmentScalarFieldEnum)[keyof typeof ReportAttachmentScalarFieldEnum]
+
+
+export const GoogleDriveConnectionScalarFieldEnum = {
+  id: 'id',
+  encryptedRefreshToken: 'encryptedRefreshToken',
+  scope: 'scope',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type GoogleDriveConnectionScalarFieldEnum = (typeof GoogleDriveConnectionScalarFieldEnum)[keyof typeof GoogleDriveConnectionScalarFieldEnum]
 
 
 export const SessionScalarFieldEnum = {

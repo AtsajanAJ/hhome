@@ -22,6 +22,9 @@ model User {
   routineCompletions RoutineCompletion[]
   projects      Project[]
   inventoryItems InventoryItem[]
+  reports       Report[]
+  reportAttachments ReportAttachment[]
+  googleDriveConnection GoogleDriveConnection?
 }
 
 enum TaskStatus {
@@ -44,6 +47,17 @@ enum RoutineFrequency {
 enum ProjectStatus {
   ACTIVE
   COMPLETED
+}
+
+enum ReportType {
+  CUSTOM
+  TASKS
+  INVENTORY
+}
+
+enum ReportSource {
+  LOCAL
+  GOOGLE_DRIVE
 }
 
 model Task {
@@ -124,6 +138,52 @@ model InventoryItem {
 
   @@index([userId, category])
   @@index([userId, name])
+}
+
+model Report {
+  id               String       @id @default(cuid())
+  title            String
+  description      String?
+  reportType       ReportType   @default(CUSTOM)
+  source           ReportSource @default(LOCAL)
+  content          String?
+  externalFileId   String?
+  externalFileName String?
+  externalFileUrl  String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  userId           String
+  user             User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attachments      ReportAttachment[]
+
+  @@index([userId, reportType])
+  @@index([userId, source])
+}
+
+model ReportAttachment {
+  id        String   @id @default(cuid())
+  fileName  String
+  mimeType  String
+  size      Int
+  data      Bytes
+  createdAt DateTime @default(now())
+  reportId  String
+  userId    String
+  report    Report   @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([reportId])
+  @@index([userId, createdAt])
+}
+
+model GoogleDriveConnection {
+  id                   String   @id @default(cuid())
+  encryptedRefreshToken String
+  scope                String?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Session {

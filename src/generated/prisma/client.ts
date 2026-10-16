@@ -72,6 +72,21 @@ export type Project = Prisma.ProjectModel
  */
 export type InventoryItem = Prisma.InventoryItemModel
 /**
+ * Model Report
+ * 
+ */
+export type Report = Prisma.ReportModel
+/**
+ * Model ReportAttachment
+ * 
+ */
+export type ReportAttachment = Prisma.ReportAttachmentModel
+/**
+ * Model GoogleDriveConnection
+ * 
+ */
+export type GoogleDriveConnection = Prisma.GoogleDriveConnectionModel
+/**
  * Model Session
  * 
  */

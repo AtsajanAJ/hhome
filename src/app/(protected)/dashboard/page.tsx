@@ -62,7 +62,7 @@ export default async function DashboardPage() {
     : 0;
 
   return (
-    <section className="mx-auto max-w-6xl py-4 sm:py-7">
+    <section className="mx-auto max-w-10xl py-4 sm:py-6">
       <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#b86b3d]">Your workspace</p>

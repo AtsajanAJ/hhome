@@ -403,6 +403,9 @@ export const ModelName = {
   RoutineCompletion: 'RoutineCompletion',
   Project: 'Project',
   InventoryItem: 'InventoryItem',
+  Report: 'Report',
+  ReportAttachment: 'ReportAttachment',
+  GoogleDriveConnection: 'GoogleDriveConnection',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -421,7 +424,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "task" | "routine" | "routineCompletion" | "project" | "inventoryItem" | "session" | "account" | "verification"
+    modelProps: "user" | "task" | "routine" | "routineCompletion" | "project" | "inventoryItem" | "report" | "reportAttachment" | "googleDriveConnection" | "session" | "account" | "verification"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -869,6 +872,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Report: {
+      payload: Prisma.$ReportPayload<ExtArgs>
+      fields: Prisma.ReportFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReportFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReportFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        findFirst: {
+          args: Prisma.ReportFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReportFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        findMany: {
+          args: Prisma.ReportFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>[]
+        }
+        create: {
+          args: Prisma.ReportCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        createMany: {
+          args: Prisma.ReportCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReportCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>[]
+        }
+        delete: {
+          args: Prisma.ReportDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        update: {
+          args: Prisma.ReportUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReportDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReportUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReportUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReportUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportPayload>
+        }
+        aggregate: {
+          args: Prisma.ReportAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReport>
+        }
+        groupBy: {
+          args: Prisma.ReportGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReportCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportCountAggregateOutputType> | number
+        }
+      }
+    }
+    ReportAttachment: {
+      payload: Prisma.$ReportAttachmentPayload<ExtArgs>
+      fields: Prisma.ReportAttachmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ReportAttachmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ReportAttachmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>
+        }
+        findFirst: {
+          args: Prisma.ReportAttachmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ReportAttachmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>
+        }
+        findMany: {
+          args: Prisma.ReportAttachmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>[]
+        }
+        create: {
+          args: Prisma.ReportAttachmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>
+        }
+        createMany: {
+          args: Prisma.ReportAttachmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ReportAttachmentCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>[]
+        }
+        delete: {
+          args: Prisma.ReportAttachmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>
+        }
+        update: {
+          args: Prisma.ReportAttachmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.ReportAttachmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ReportAttachmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ReportAttachmentUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>[]
+        }
+        upsert: {
+          args: Prisma.ReportAttachmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReportAttachmentPayload>
+        }
+        aggregate: {
+          args: Prisma.ReportAttachmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReportAttachment>
+        }
+        groupBy: {
+          args: Prisma.ReportAttachmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportAttachmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ReportAttachmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReportAttachmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    GoogleDriveConnection: {
+      payload: Prisma.$GoogleDriveConnectionPayload<ExtArgs>
+      fields: Prisma.GoogleDriveConnectionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GoogleDriveConnectionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GoogleDriveConnectionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>
+        }
+        findFirst: {
+          args: Prisma.GoogleDriveConnectionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GoogleDriveConnectionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>
+        }
+        findMany: {
+          args: Prisma.GoogleDriveConnectionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>[]
+        }
+        create: {
+          args: Prisma.GoogleDriveConnectionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>
+        }
+        createMany: {
+          args: Prisma.GoogleDriveConnectionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GoogleDriveConnectionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>[]
+        }
+        delete: {
+          args: Prisma.GoogleDriveConnectionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>
+        }
+        update: {
+          args: Prisma.GoogleDriveConnectionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>
+        }
+        deleteMany: {
+          args: Prisma.GoogleDriveConnectionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GoogleDriveConnectionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GoogleDriveConnectionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>[]
+        }
+        upsert: {
+          args: Prisma.GoogleDriveConnectionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GoogleDriveConnectionPayload>
+        }
+        aggregate: {
+          args: Prisma.GoogleDriveConnectionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGoogleDriveConnection>
+        }
+        groupBy: {
+          args: Prisma.GoogleDriveConnectionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GoogleDriveConnectionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GoogleDriveConnectionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GoogleDriveConnectionCountAggregateOutputType> | number
+        }
+      }
+    }
     Session: {
       payload: Prisma.$SessionPayload<ExtArgs>
       fields: Prisma.SessionFieldRefs
@@ -1213,6 +1438,50 @@ export const InventoryItemScalarFieldEnum = {
 export type InventoryItemScalarFieldEnum = (typeof InventoryItemScalarFieldEnum)[keyof typeof InventoryItemScalarFieldEnum]
 
 
+export const ReportScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  reportType: 'reportType',
+  source: 'source',
+  content: 'content',
+  externalFileId: 'externalFileId',
+  externalFileName: 'externalFileName',
+  externalFileUrl: 'externalFileUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type ReportScalarFieldEnum = (typeof ReportScalarFieldEnum)[keyof typeof ReportScalarFieldEnum]
+
+
+export const ReportAttachmentScalarFieldEnum = {
+  id: 'id',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  size: 'size',
+  data: 'data',
+  createdAt: 'createdAt',
+  reportId: 'reportId',
+  userId: 'userId'
+} as const
+
+export type ReportAttachmentScalarFieldEnum = (typeof ReportAttachmentScalarFieldEnum)[keyof typeof ReportAttachmentScalarFieldEnum]
+
+
+export const GoogleDriveConnectionScalarFieldEnum = {
+  id: 'id',
+  encryptedRefreshToken: 'encryptedRefreshToken',
+  scope: 'scope',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type GoogleDriveConnectionScalarFieldEnum = (typeof GoogleDriveConnectionScalarFieldEnum)[keyof typeof GoogleDriveConnectionScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -1394,6 +1663,48 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'ReportType'
+ */
+export type EnumReportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportType'>
+    
+
+
+/**
+ * Reference to a field of type 'ReportType[]'
+ */
+export type ListEnumReportTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ReportSource'
+ */
+export type EnumReportSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportSource'>
+    
+
+
+/**
+ * Reference to a field of type 'ReportSource[]'
+ */
+export type ListEnumReportSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReportSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Bytes'
+ */
+export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+/**
+ * Reference to a field of type 'Bytes[]'
+ */
+export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes[]'>
+    
+
+
+/**
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1563,6 +1874,9 @@ export type GlobalOmitConfig = {
   routineCompletion?: Prisma.RoutineCompletionOmit
   project?: Prisma.ProjectOmit
   inventoryItem?: Prisma.InventoryItemOmit
+  report?: Prisma.ReportOmit
+  reportAttachment?: Prisma.ReportAttachmentOmit
+  googleDriveConnection?: Prisma.GoogleDriveConnectionOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit

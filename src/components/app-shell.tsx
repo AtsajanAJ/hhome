@@ -100,7 +100,7 @@ function Sidebar({ open, onClose }: { open: boolean; onClose: () => void }) {
 export function AppShell({ children, user }: { children: ReactNode; user: User }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const pageTitle = pathname === "/tasks" ? "Tasks" : pathname.startsWith("/settings") ? "Settings" : "Overview";
+  const pageTitle = pathname === "/tasks" ? "Tasks" : pathname.startsWith("/settings") ? "Settings" : pathname.startsWith("/routines") ? "Routines" : pathname.startsWith("/projects") ? "Projects" : pathname.startsWith("/inventory") ? "Inventory" : "Overview";
 
   useEffect(() => {
     document.body.style.overflow = sidebarOpen ? "hidden" : "";

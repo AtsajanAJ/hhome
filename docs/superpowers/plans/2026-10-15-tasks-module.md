@@ -263,3 +263,21 @@
 - [ ] Query inventory aggregates and low-stock items for the authenticated user only.
 - [ ] Show the summary with a link to `/inventory` without changing task or routine sections.
 - [ ] Run lint, build, and UI detector.
+
+### Task 17: Add Reports with import/export (deferred)
+
+**Files:**
+- Modify: `prisma/schema.prisma`
+- Create: `src/lib/validations/report.ts`
+- Create: `src/app/(protected)/reports/actions.ts`
+- Create: `src/app/(protected)/reports/page.tsx`
+- Create: `src/components/reports/reports-page.tsx`
+- Modify: `src/components/app-shell.tsx`
+
+**Produces:** Deferred for a later iteration. The current Reports UI, routes, and Google Drive integration were removed from the active application; database migrations are retained so no existing data is deleted.
+
+- [ ] Add a `Report` model with report type, source type, content, optional external file metadata, and owner relation.
+- [ ] Add authenticated create, update, and delete actions.
+- [ ] Build `/reports` with custom report editor, searchable report cards, JSON/CSV export, and CSV import preview.
+- [ ] Keep Google Drive as an optional source metadata path; do not require OAuth credentials for local reports.
+- [ ] Run migration, lint, build, and UI detector.

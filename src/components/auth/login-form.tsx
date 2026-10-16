@@ -43,6 +43,16 @@ export function LoginForm() {
     router.refresh();
   }
 
+  async function signInWithGoogle() {
+    setError("");
+    setPending(true);
+    const response = await authClient.signIn.social({ provider: "google", callbackURL: "/dashboard" });
+    if (response.error) {
+      setPending(false);
+      setError("Unable to sign in with Google. Please try again.");
+    }
+  }
+
   return (
     <AuthFormShell
       eyebrow="Home office"
@@ -68,6 +78,8 @@ export function LoginForm() {
           {pending ? "Signing in…" : "Sign in"}
         </button>
       </form>
+      <div className="my-5 flex items-center gap-3 text-xs text-[#9a9c95]"><span className="h-px flex-1 bg-[#e2ded4]" /><span>OR</span><span className="h-px flex-1 bg-[#e2ded4]" /></div>
+      <button type="button" disabled={pending} onClick={signInWithGoogle} className="flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-[#d8d4c9] bg-white font-semibold transition hover:border-[#1c2b27] disabled:cursor-not-allowed disabled:opacity-60"><span className="text-base font-bold text-[#4285f4]">G</span>{pending ? "Connecting…" : "Continue with Google"}</button>
     </AuthFormShell>
   );
 }

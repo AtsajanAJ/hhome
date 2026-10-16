@@ -41,3 +41,20 @@ export const ProjectStatus = {
 } as const
 
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
+
+
+export const ReportType = {
+  CUSTOM: 'CUSTOM',
+  TASKS: 'TASKS',
+  INVENTORY: 'INVENTORY'
+} as const
+
+export type ReportType = (typeof ReportType)[keyof typeof ReportType]
+
+
+export const ReportSource = {
+  LOCAL: 'LOCAL',
+  GOOGLE_DRIVE: 'GOOGLE_DRIVE'
+} as const
+
+export type ReportSource = (typeof ReportSource)[keyof typeof ReportSource]

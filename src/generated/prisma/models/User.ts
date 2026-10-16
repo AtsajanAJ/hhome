@@ -205,6 +205,9 @@ export type UserWhereInput = {
   routineCompletions?: Prisma.RoutineCompletionListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   inventoryItems?: Prisma.InventoryItemListRelationFilter
+  reports?: Prisma.ReportListRelationFilter
+  reportAttachments?: Prisma.ReportAttachmentListRelationFilter
+  googleDriveConnection?: Prisma.XOR<Prisma.GoogleDriveConnectionNullableScalarRelationFilter, Prisma.GoogleDriveConnectionWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -222,6 +225,9 @@ export type UserOrderByWithRelationInput = {
   routineCompletions?: Prisma.RoutineCompletionOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   inventoryItems?: Prisma.InventoryItemOrderByRelationAggregateInput
+  reports?: Prisma.ReportOrderByRelationAggregateInput
+  reportAttachments?: Prisma.ReportAttachmentOrderByRelationAggregateInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -242,6 +248,9 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   routineCompletions?: Prisma.RoutineCompletionListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   inventoryItems?: Prisma.InventoryItemListRelationFilter
+  reports?: Prisma.ReportListRelationFilter
+  reportAttachments?: Prisma.ReportAttachmentListRelationFilter
+  googleDriveConnection?: Prisma.XOR<Prisma.GoogleDriveConnectionNullableScalarRelationFilter, Prisma.GoogleDriveConnectionWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -285,6 +294,9 @@ export type UserCreateInput = {
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -302,6 +314,9 @@ export type UserUncheckedCreateInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -319,6 +334,9 @@ export type UserUpdateInput = {
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -336,6 +354,9 @@ export type UserUncheckedUpdateInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -489,6 +510,48 @@ export type UserUpdateOneRequiredWithoutInventoryItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutInventoryItemsInput, Prisma.UserUpdateWithoutInventoryItemsInput>, Prisma.UserUncheckedUpdateWithoutInventoryItemsInput>
 }
 
+export type UserCreateNestedOneWithoutReportsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReportsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportsInput
+  upsert?: Prisma.UserUpsertWithoutReportsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportsInput, Prisma.UserUpdateWithoutReportsInput>, Prisma.UserUncheckedUpdateWithoutReportsInput>
+}
+
+export type UserCreateNestedOneWithoutReportAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportAttachmentsInput, Prisma.UserUncheckedCreateWithoutReportAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutReportAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReportAttachmentsInput, Prisma.UserUncheckedCreateWithoutReportAttachmentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReportAttachmentsInput
+  upsert?: Prisma.UserUpsertWithoutReportAttachmentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReportAttachmentsInput, Prisma.UserUpdateWithoutReportAttachmentsInput>, Prisma.UserUncheckedUpdateWithoutReportAttachmentsInput>
+}
+
+export type UserCreateNestedOneWithoutGoogleDriveConnectionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGoogleDriveConnectionInput, Prisma.UserUncheckedCreateWithoutGoogleDriveConnectionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGoogleDriveConnectionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutGoogleDriveConnectionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutGoogleDriveConnectionInput, Prisma.UserUncheckedCreateWithoutGoogleDriveConnectionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutGoogleDriveConnectionInput
+  upsert?: Prisma.UserUpsertWithoutGoogleDriveConnectionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGoogleDriveConnectionInput, Prisma.UserUpdateWithoutGoogleDriveConnectionInput>, Prisma.UserUncheckedUpdateWithoutGoogleDriveConnectionInput>
+}
+
 export type UserCreateNestedOneWithoutSessionsInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSessionsInput, Prisma.UserUncheckedCreateWithoutSessionsInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionsInput
@@ -531,6 +594,9 @@ export type UserCreateWithoutTasksInput = {
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTasksInput = {
@@ -547,6 +613,9 @@ export type UserUncheckedCreateWithoutTasksInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTasksInput = {
@@ -579,6 +648,9 @@ export type UserUpdateWithoutTasksInput = {
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTasksInput = {
@@ -595,6 +667,9 @@ export type UserUncheckedUpdateWithoutTasksInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRoutinesInput = {
@@ -611,6 +686,9 @@ export type UserCreateWithoutRoutinesInput = {
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoutinesInput = {
@@ -627,6 +705,9 @@ export type UserUncheckedCreateWithoutRoutinesInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoutinesInput = {
@@ -659,6 +740,9 @@ export type UserUpdateWithoutRoutinesInput = {
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoutinesInput = {
@@ -675,6 +759,9 @@ export type UserUncheckedUpdateWithoutRoutinesInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRoutineCompletionsInput = {
@@ -691,6 +778,9 @@ export type UserCreateWithoutRoutineCompletionsInput = {
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRoutineCompletionsInput = {
@@ -707,6 +797,9 @@ export type UserUncheckedCreateWithoutRoutineCompletionsInput = {
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRoutineCompletionsInput = {
@@ -739,6 +832,9 @@ export type UserUpdateWithoutRoutineCompletionsInput = {
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRoutineCompletionsInput = {
@@ -755,6 +851,9 @@ export type UserUncheckedUpdateWithoutRoutineCompletionsInput = {
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -771,6 +870,9 @@ export type UserCreateWithoutProjectsInput = {
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -787,6 +889,9 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -819,6 +924,9 @@ export type UserUpdateWithoutProjectsInput = {
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -835,6 +943,9 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutInventoryItemsInput = {
@@ -851,6 +962,9 @@ export type UserCreateWithoutInventoryItemsInput = {
   routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutInventoryItemsInput = {
@@ -867,6 +981,9 @@ export type UserUncheckedCreateWithoutInventoryItemsInput = {
   routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutInventoryItemsInput = {
@@ -899,6 +1016,9 @@ export type UserUpdateWithoutInventoryItemsInput = {
   routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutInventoryItemsInput = {
@@ -915,6 +1035,285 @@ export type UserUncheckedUpdateWithoutInventoryItemsInput = {
   routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReportsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReportsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReportsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+}
+
+export type UserUpsertWithoutReportsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReportsInput, Prisma.UserUncheckedUpdateWithoutReportsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportsInput, Prisma.UserUncheckedCreateWithoutReportsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReportsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReportsInput, Prisma.UserUncheckedUpdateWithoutReportsInput>
+}
+
+export type UserUpdateWithoutReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReportsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReportAttachmentsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReportAttachmentsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReportAttachmentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportAttachmentsInput, Prisma.UserUncheckedCreateWithoutReportAttachmentsInput>
+}
+
+export type UserUpsertWithoutReportAttachmentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReportAttachmentsInput, Prisma.UserUncheckedUpdateWithoutReportAttachmentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReportAttachmentsInput, Prisma.UserUncheckedCreateWithoutReportAttachmentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReportAttachmentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReportAttachmentsInput, Prisma.UserUncheckedUpdateWithoutReportAttachmentsInput>
+}
+
+export type UserUpdateWithoutReportAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReportAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutGoogleDriveConnectionInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutGoogleDriveConnectionInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutUserInput
+  routines?: Prisma.RoutineUncheckedCreateNestedManyWithoutUserInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutGoogleDriveConnectionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutGoogleDriveConnectionInput, Prisma.UserUncheckedCreateWithoutGoogleDriveConnectionInput>
+}
+
+export type UserUpsertWithoutGoogleDriveConnectionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutGoogleDriveConnectionInput, Prisma.UserUncheckedUpdateWithoutGoogleDriveConnectionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutGoogleDriveConnectionInput, Prisma.UserUncheckedCreateWithoutGoogleDriveConnectionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutGoogleDriveConnectionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutGoogleDriveConnectionInput, Prisma.UserUncheckedUpdateWithoutGoogleDriveConnectionInput>
+}
+
+export type UserUpdateWithoutGoogleDriveConnectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutGoogleDriveConnectionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutUserNestedInput
+  routines?: Prisma.RoutineUncheckedUpdateManyWithoutUserNestedInput
+  routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -931,6 +1330,9 @@ export type UserCreateWithoutSessionsInput = {
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -947,6 +1349,9 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -979,6 +1384,9 @@ export type UserUpdateWithoutSessionsInput = {
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -995,6 +1403,9 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -1011,6 +1422,9 @@ export type UserCreateWithoutAccountsInput = {
   routineCompletions?: Prisma.RoutineCompletionCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1027,6 +1441,9 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   inventoryItems?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutUserInput
+  reports?: Prisma.ReportUncheckedCreateNestedManyWithoutUserInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedCreateNestedManyWithoutUserInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1059,6 +1476,9 @@ export type UserUpdateWithoutAccountsInput = {
   routineCompletions?: Prisma.RoutineCompletionUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1075,6 +1495,9 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   routineCompletions?: Prisma.RoutineCompletionUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   inventoryItems?: Prisma.InventoryItemUncheckedUpdateManyWithoutUserNestedInput
+  reports?: Prisma.ReportUncheckedUpdateManyWithoutUserNestedInput
+  reportAttachments?: Prisma.ReportAttachmentUncheckedUpdateManyWithoutUserNestedInput
+  googleDriveConnection?: Prisma.GoogleDriveConnectionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -1090,6 +1513,8 @@ export type UserCountOutputType = {
   routineCompletions: number
   projects: number
   inventoryItems: number
+  reports: number
+  reportAttachments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1100,6 +1525,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   routineCompletions?: boolean | UserCountOutputTypeCountRoutineCompletionsArgs
   projects?: boolean | UserCountOutputTypeCountProjectsArgs
   inventoryItems?: boolean | UserCountOutputTypeCountInventoryItemsArgs
+  reports?: boolean | UserCountOutputTypeCountReportsArgs
+  reportAttachments?: boolean | UserCountOutputTypeCountReportAttachmentsArgs
 }
 
 /**
@@ -1161,6 +1588,20 @@ export type UserCountOutputTypeCountInventoryItemsArgs<ExtArgs extends runtime.T
   where?: Prisma.InventoryItemWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountReportAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReportAttachmentWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1177,6 +1618,9 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   routineCompletions?: boolean | Prisma.User$routineCompletionsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
   inventoryItems?: boolean | Prisma.User$inventoryItemsArgs<ExtArgs>
+  reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
+  reportAttachments?: boolean | Prisma.User$reportAttachmentsArgs<ExtArgs>
+  googleDriveConnection?: boolean | Prisma.User$googleDriveConnectionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1219,6 +1663,9 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   routineCompletions?: boolean | Prisma.User$routineCompletionsArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
   inventoryItems?: boolean | Prisma.User$inventoryItemsArgs<ExtArgs>
+  reports?: boolean | Prisma.User$reportsArgs<ExtArgs>
+  reportAttachments?: boolean | Prisma.User$reportAttachmentsArgs<ExtArgs>
+  googleDriveConnection?: boolean | Prisma.User$googleDriveConnectionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1234,6 +1681,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     routineCompletions: Prisma.$RoutineCompletionPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
     inventoryItems: Prisma.$InventoryItemPayload<ExtArgs>[]
+    reports: Prisma.$ReportPayload<ExtArgs>[]
+    reportAttachments: Prisma.$ReportAttachmentPayload<ExtArgs>[]
+    googleDriveConnection: Prisma.$GoogleDriveConnectionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1644,6 +2094,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   routineCompletions<T extends Prisma.User$routineCompletionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$routineCompletionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RoutineCompletionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.User$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   inventoryItems<T extends Prisma.User$inventoryItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$inventoryItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reports<T extends Prisma.User$reportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reportAttachments<T extends Prisma.User$reportAttachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reportAttachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReportAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  googleDriveConnection<T extends Prisma.User$googleDriveConnectionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$googleDriveConnectionArgs<ExtArgs>>): Prisma.Prisma__GoogleDriveConnectionClient<runtime.Types.Result.GetResult<Prisma.$GoogleDriveConnectionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2238,6 +2691,73 @@ export type User$inventoryItemsArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.InventoryItemScalarFieldEnum | Prisma.InventoryItemScalarFieldEnum[]
+}
+
+/**
+ * User.reports
+ */
+export type User$reportsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Report
+   */
+  select?: Prisma.ReportSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Report
+   */
+  omit?: Prisma.ReportOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportInclude<ExtArgs> | null
+  where?: Prisma.ReportWhereInput
+  orderBy?: Prisma.ReportOrderByWithRelationInput | Prisma.ReportOrderByWithRelationInput[]
+  cursor?: Prisma.ReportWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportScalarFieldEnum | Prisma.ReportScalarFieldEnum[]
+}
+
+/**
+ * User.reportAttachments
+ */
+export type User$reportAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ReportAttachment
+   */
+  select?: Prisma.ReportAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ReportAttachment
+   */
+  omit?: Prisma.ReportAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReportAttachmentInclude<ExtArgs> | null
+  where?: Prisma.ReportAttachmentWhereInput
+  orderBy?: Prisma.ReportAttachmentOrderByWithRelationInput | Prisma.ReportAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.ReportAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReportAttachmentScalarFieldEnum | Prisma.ReportAttachmentScalarFieldEnum[]
+}
+
+/**
+ * User.googleDriveConnection
+ */
+export type User$googleDriveConnectionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GoogleDriveConnection
+   */
+  select?: Prisma.GoogleDriveConnectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GoogleDriveConnection
+   */
+  omit?: Prisma.GoogleDriveConnectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GoogleDriveConnectionInclude<ExtArgs> | null
+  where?: Prisma.GoogleDriveConnectionWhereInput
 }
 
 /**
